@@ -1,18 +1,31 @@
 var siteInput;
 var tarea;
+var saveButton;
+var renderBool=true;
+var site;
 function setup() {
     noCanvas();
     tarea=document.getElementById("tarea");
-    tarea.style.height=window.innerHeight*0.75+"px";
     siteInput=document.getElementById("site");
-    if(window.location.search.split("=")[1]) {
-        siteInput.value=window.location.search.split("=")[1];
+    document.body.style.display="none";
+    if(locsearch().site) {
+        siteInput.value=locsearch().site;
+        firebase.database().ref().child(locsearch().site).once('value', function(data) {
+            site=data.val();
+            document.body.style.display="inline";
+            tarea.style.height=window.innerHeight*0.75+"px";
+            console.log(site);
+            tarea.value=site.lines.join("\n");
+            renderBool=false;
+        });
     }else{
-        window.location.href="../";ddd
+        window.location.href="";ddd
     }
 }
 function draw() {
-
+    if(site && renderBool) {
+        
+    }
 }
 function c() {
     var db=firebase.database().ref().child(siteInput.value);
