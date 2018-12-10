@@ -7,7 +7,6 @@ function setup() {
     noCanvas();
     tarea=document.getElementById("tarea");
     siteInput=document.getElementById("site");
-    document.body.style.display="none";
     if(locsearch().site) {
         siteInput.value=locsearch().site;
         firebase.database().ref().child(locsearch().site).once('value', function(data) {
@@ -21,12 +20,9 @@ function setup() {
     }else{
         window.location.href="";ddd
     }
+    noLoop();
 }
-function draw() {
-    if(site && renderBool) {
-        
-    }
-}
+
 function c() {
     var db=firebase.database().ref().child(siteInput.value);
     var val={};

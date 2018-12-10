@@ -8,6 +8,9 @@ function setup() {
         db=firebase.database().ref().child(search.site);
         db.once('value',function(data) {
             site=data.val();
+            for(var i=0;i<site.lines.length;i++) {
+                createSpan(site.lines[i]+"<br>");
+            }
         });
     }else{
         site={
@@ -16,16 +19,5 @@ function setup() {
             ]
         }
     }
-    
+    noLoop();
 } 
-function draw() {
-   if(site && writeSiteBool) {
-    writeSite();
-   }
-}
-function writeSite() {
-    for(var i=0;i<site.lines.length;i++) {
-        createSpan(site.lines[i]+"<br>");
-    }
-    writeSiteBool=false;
-}
