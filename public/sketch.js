@@ -9,15 +9,19 @@ function setup() {
         db.once('value',function(data) {
             site=data.val();
             for(var i=0;i<site.lines.length;i++) {
-                createSpan(site.lines[i]+"<br>");
+                createSpan((site.lines[i].startsWith("<h1>"))?site.lines[i]:site.lines[i]+"<br>");
             }
         });
     }else{
-        site={
-            lines: [
-                "That site you are looking for dosn't exist."
-            ]
-        }
+        noSite();
     }
-    noLoop();
-} 
+}
+function draw() {
+    if(frameCount>=3*60 && !site && writeSiteBool) {
+        noSite();
+        writeSiteBool=false;
+    }
+}
+function noSite() {
+    createSpan("Couldn't load the page");
+}

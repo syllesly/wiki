@@ -18,7 +18,7 @@ function setup() {
             renderBool=false;
         });
     }else{
-        window.location.href="";ddd
+        window.location.href="";
     }
     noLoop();
 }
