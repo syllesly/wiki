@@ -8,5 +8,4 @@ function locsearch() {
         }
     }
     return val;
-    
 }
